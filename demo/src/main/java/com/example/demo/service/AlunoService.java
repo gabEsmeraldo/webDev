@@ -39,6 +39,6 @@ public class AlunoService {
                     aluno.setDataNasc(updateAluno.getDataNasc());
                     aluno.setSenha(updateAluno.getSenha());
                     return alunoRepository.save(aluno);
-                })
+                }).orElseThrow(() -> new RuntimeException("Aluno não existe!"));
     }
 }
