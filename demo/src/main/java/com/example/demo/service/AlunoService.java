@@ -51,13 +51,10 @@ public class AlunoService {
 
 
     //Parte do DTO
-
+/*
     public Optional<AlunoDTO> getAlunoById(Long id){
-        Aluno aluno = alunoRepository.findById(id).orElse(null);
-        if(aluno != null){
-            return convertToDTO(aluno);
-        }
-        return Optional.empty();
+        return alunoRepository.findById(id)
+                .map(this::toDTO);
     }
 
     public void saveAluno(AlunoDTO alunoDTO){
@@ -67,7 +64,7 @@ public class AlunoService {
 
     private Aluno convertToEntity(AlunoDTO alunoDTO){
         return new Aluno(alunoDTO.getId(), alunoDTO.getNome(), alunoDTO.getEmail());
-    }
+    }*/
     // Mapper
     private AlunoDTO toDTO(Aluno aluno){
         return new AlunoDTO(aluno.getId(), aluno.getNome(), aluno.getEmail());
