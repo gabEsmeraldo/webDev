@@ -20,6 +20,10 @@ public class Aluno {
     @OneToOne(mappedBy = "aluno", cascade = CascadeType.ALL)
     private Endereco endereco;
 
+    /*@ManyToOne
+    @JoinColumn(name = "curso_id", referencedColumnName = "id")
+    private Curso curso;*/
+
     public Aluno() {
     }
 
