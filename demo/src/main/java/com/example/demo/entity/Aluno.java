@@ -1,7 +1,11 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.Date;
 import java.util.List;
@@ -13,9 +17,20 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O nome é obrigatório")
+    @Column(nullable = false)
     private String nome;
+
+    @NotNull(message = "A data de nascimento é obrigatória")
+    @Temporal(TemporalType.DATE)
     private Date dataNasc;
+
+    @Email(message = "E-mail inválido")
+    @NotBlank(message = "O e-mail é obrigatório")
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @NotBlank(message = "A senha é obrigatória")
     private String senha;
 
     @OneToOne(mappedBy = "aluno", cascade = CascadeType.ALL)
