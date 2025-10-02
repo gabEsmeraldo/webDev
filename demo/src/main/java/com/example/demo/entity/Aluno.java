@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Aluno {
@@ -20,9 +21,21 @@ public class Aluno {
     @OneToOne(mappedBy = "aluno", cascade = CascadeType.ALL)
     private Endereco endereco;
 
-    /*@ManyToOne
-    @JoinColumn(name = "curso_id", referencedColumnName = "id")
-    private Curso curso;*/
+    @ManyToMany
+    @JoinTable(
+            name = "aluno-curso",
+            joinColumns = @JoinColumn(name = "aluno_id"),
+            inverseJoinColumns = @JoinColumn(name = "curso_id")
+    )
+    private List<Curso> cursos;
+
+    @ManyToMany
+    @JoinTable(
+            name = "aluno-disciplina",
+            joinColumns = @JoinColumn(name = "aluno_id"),
+            inverseJoinColumns = @JoinColumn(name = "disciplina_id")
+    )
+    private List<Disciplina> disciplinas;
 
     public Aluno() {
     }
@@ -89,4 +102,19 @@ public class Aluno {
         this.endereco = endereco;
     }
 
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
 }

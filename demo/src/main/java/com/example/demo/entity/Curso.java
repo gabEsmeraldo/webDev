@@ -1,9 +1,8 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Curso {
@@ -16,12 +15,20 @@ public class Curso {
     private int qntdSemestre;
     private String descricao;
 
-    public Curso(long id, String nome, int cargaHoraria, int qntdSemestre, String descricao) {
+    @ManyToOne
+    @JoinColumn(name = "centro_id")
+    private Centro centro;
+
+    @ManyToMany(mappedBy = "cursos")
+    private List<Aluno> alunos;
+
+    public Curso(long id, String nome, int cargaHoraria, int qntdSemestre, String descricao, Centro centro) {
         this.id = id;
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
         this.qntdSemestre = qntdSemestre;
         this.descricao = descricao;
+        this.centro = centro;
     }
 
     public Curso() {
@@ -65,5 +72,21 @@ public class Curso {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Centro getCentro() {
+        return centro;
+    }
+
+    public void setCentro(Centro centro) {
+        this.centro = centro;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 }
