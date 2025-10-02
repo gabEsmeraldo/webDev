@@ -29,7 +29,8 @@ public class EnderecoService {
 
     public Endereco save(Long alunoId, Endereco endereco) {
         Aluno aluno = alunoRepository.findById(alunoId)
-                .orElseThrow(() -> RuntimeException("Aluno não encontrado!"));
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado!"));
+
         endereco.setAluno(aluno);
 
         return enderecoRepository.save(endereco);
